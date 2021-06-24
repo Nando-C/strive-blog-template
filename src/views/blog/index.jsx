@@ -2,22 +2,35 @@ import React, { Component } from "react";
 import { Container, Image } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
-import posts from "../../data/posts.json";
+// import posts from "../../data/posts.json";
 import "./styles.css";
 class Blog extends Component {
   state = {
     blog: {},
     loading: true,
   };
-  componentDidMount() {
+  componentDidMount = async() => {
     const { id } = this.props.match.params;
-    console.log(posts);
-    const blog = posts.find((post) => post._id.toString() === id);
-    if (blog) {
-      this.setState({ blog, loading: false });
-    } else {
-      this.props.history.push("/404");
+
+    try {
+      const response = await fetch(`http://localhost:3001/blogPosts/${id}`)
+        const post = await response.json()
+        console.log(post)
+        this.setState({
+          blog: post, 
+          loading: false
+        })
+      
+    } catch (error) {
+      console.log(error)
     }
+    // console.log(posts);
+    // const blog = posts.find((post) => post._id.toString() === id);
+    // if (blog) {
+    //   this.setState({ blog, loading: false });
+    // } else {
+    //   this.props.history.push("/404");
+    // }
   }
 
   render() {
