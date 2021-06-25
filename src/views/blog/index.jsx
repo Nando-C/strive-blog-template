@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Container, Image, ListGroup, Card } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
 // import posts from "../../data/posts.json";
@@ -55,6 +55,17 @@ class Blog extends Component {
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+            <div>
+
+              <ListGroup >
+                {blog.comments.map(com => 
+                  <ListGroup.Item className='border-0'>
+                    <Card>
+                      <Card.Body>"{com}"</Card.Body>
+                    </Card>
+                  </ListGroup.Item>)}
+              </ListGroup>
+            </div>
           </Container>
         </div>
       );

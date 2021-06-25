@@ -20,8 +20,8 @@ export default class NewBlogPost extends Component {
         unit: "minutes"
       },
       author: {
-        name: "Fulanito",
-        avatar:"https://ui-avatars.com/api/?name=Fulanito+Detal"
+        name: "Jim Morrisson",
+        avatar:"http://localhost:3001/img/authors/609mg366kqb5vrne.jpg"
       },
       content: "",
     }
