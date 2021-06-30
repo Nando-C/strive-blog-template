@@ -1,14 +1,30 @@
 import React, { Component } from "react";
-import { Container, Image, ListGroup, Card } from "react-bootstrap";
+import { Container, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
+import CommentModal from "../../components/blog/modal/index"
 // import posts from "../../data/posts.json";
 import "./styles.css";
 class Blog extends Component {
   state = {
     blog: {},
     loading: true,
+    show: false,
   };
+
+  handleClose = () => {
+    this.setState({
+      ...this.state, 
+      show: false
+    })
+  }
+  handleShow = () => {
+    this.setState({
+      ...this.state, 
+      show: true
+    })
+  }
+
   componentDidMount = async() => {
     const { id } = this.props.match.params;
 
@@ -55,8 +71,16 @@ class Blog extends Component {
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+            
             <div>
-
+              <Button variant="primary" onClick={this.handleShow}>
+                Leave Comment
+              </Button>
+              <CommentModal blogId={blog._id} show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose}/>
+            </div>
+            <div>
+              {blog.comments
+              ? <><h3 className='my-3'>Comments</h3>
               <ListGroup >
                 {blog.comments.map(com => 
                   <ListGroup.Item className='border-0'>
@@ -64,7 +88,9 @@ class Blog extends Component {
                       <Card.Body>"{com}"</Card.Body>
                     </Card>
                   </ListGroup.Item>)}
-              </ListGroup>
+              </ListGroup></>
+              : <></>
+            }
             </div>
           </Container>
         </div>
