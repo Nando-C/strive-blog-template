@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import BlogAuthor from "../../components/blog/blog-author";
-import CommentModal from "../../components/blog/modal/index"
+import PostModal from "../../components/blog/post-modal/index"
 // import posts from "../../data/posts.json";
 import "./styles.css";
 class Blog extends Component {
@@ -25,9 +25,9 @@ class Blog extends Component {
     })
   }
 
-  componentDidMount = async() => {
+  fetchBlog = async () => {
     const { id } = this.props.match.params;
-
+  
     try {
       const response = await fetch(`http://localhost:3001/blogPosts/${id}`)
         const post = await response.json()
@@ -40,13 +40,10 @@ class Blog extends Component {
     } catch (error) {
       console.log(error)
     }
-    // console.log(posts);
-    // const blog = posts.find((post) => post._id.toString() === id);
-    // if (blog) {
-    //   this.setState({ blog, loading: false });
-    // } else {
-    //   this.props.history.push("/404");
-    // }
+
+  }
+  componentDidMount = async() => {
+    this.fetchBlog()
   }
 
   render() {
@@ -57,6 +54,11 @@ class Blog extends Component {
       return (
         <div className="blog-details-root">
           <Container>
+            <div className='mt-5 d-flex justify-content-end'>
+              <Button variant="primary" onClick={this.handleShow}>
+                Edit Post
+              </Button>
+            </div>
             <Image className="blog-details-cover" src={blog.cover} fluid />
             <h1 className="blog-details-title">{blog.title}</h1>
 
@@ -76,7 +78,7 @@ class Blog extends Component {
               <Button variant="primary" onClick={this.handleShow}>
                 Leave Comment
               </Button>
-              <CommentModal blogId={blog._id} show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose}/>
+              <PostModal blog={this.state.blog} show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose} fetchBlog={this.fetchBlog}/>
             </div>
             <div>
               {blog.comments

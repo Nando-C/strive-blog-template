@@ -21,7 +21,7 @@ export default class NewBlogPost extends Component {
       },
       author: {
         name: "Jim Morrisson",
-        avatar:"http://localhost:3001/img/authors/609mg366kqb5vrne.jpg"
+        avatar:"https://res.cloudinary.com/dldkxppwm/image/upload/v1625083348/authors/i9njqmmskahkoo521mox.png"
       },
       content: "",
     }
@@ -77,9 +77,14 @@ export default class NewBlogPost extends Component {
             <Form.Label>Title</Form.Label>
             <Form.Control id="title" size="lg" placeholder="Title" value={this.state.newPost.title} onChange={(e) => this.handleChange(e)}/>
           </Form.Group>
+          {/* <Form.Group className="mt-3">
+            <Form.Label>Author</Form.Label>
+            <Form.Control id="author.name" size="lg" placeholder="Author name" value={this.state.newPost.author.name} onChange={(e) => this.handleChange(e)}/>
+          </Form.Group> */}
           <Form.Group className="mt-3">
             <Form.Label>Category</Form.Label>
             <Form.Control id="category" size="lg" as="select" value={this.state.newPost.category} onChange={(e) => this.handleChange(e)}>
+              <option>Select category</option>
               <option>Category1</option>
               <option>Category2</option>
               <option>Category3</option>
