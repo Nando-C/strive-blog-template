@@ -5,6 +5,12 @@ import { Container, Form, Button } from "react-bootstrap";
 import "./styles.css";
 export default class NewBlogPost extends Component {
 
+    // constructor(props) {
+  //   super(props);
+  //   this.state = { text: "" };
+  //   this.handleChange = this.handleChange.bind(this);
+  // }
+
   constructor(props) {
     super(props)
     this.handleQuillChange = this.handleQuillChange.bind(this)
@@ -26,12 +32,6 @@ export default class NewBlogPost extends Component {
       content: "",
     }
   }
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { text: "" };
-  //   this.handleChange = this.handleChange.bind(this);
-  // }
 
   handleChange(e) {
     this.setState({
@@ -64,11 +64,13 @@ export default class NewBlogPost extends Component {
       })
       // const postsArray = await response.json()
       console.log(response)
+      this.props.history.push("/")
       
     } catch (error) {
         console.log(error)
     }
   }
+
   render() {
     return (
       <Container className="new-blog-container">
@@ -77,10 +79,6 @@ export default class NewBlogPost extends Component {
             <Form.Label>Title</Form.Label>
             <Form.Control id="title" size="lg" placeholder="Title" value={this.state.newPost.title} onChange={(e) => this.handleChange(e)}/>
           </Form.Group>
-          {/* <Form.Group className="mt-3">
-            <Form.Label>Author</Form.Label>
-            <Form.Control id="author.name" size="lg" placeholder="Author name" value={this.state.newPost.author.name} onChange={(e) => this.handleChange(e)}/>
-          </Form.Group> */}
           <Form.Group className="mt-3">
             <Form.Label>Category</Form.Label>
             <Form.Control id="category" size="lg" as="select" value={this.state.newPost.category} onChange={(e) => this.handleChange(e)}>

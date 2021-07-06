@@ -78,7 +78,7 @@ class Blog extends Component {
               <Button variant="primary" onClick={this.handleShow}>
                 Leave Comment
               </Button>
-              <PostModal blog={this.state.blog} show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose} fetchBlog={this.fetchBlog}/>
+              <PostModal blog={this.state.blog} show={this.state.show} handleShow={this.handleShow} handleClose={this.handleClose} fetchBlog={this.fetchBlog} history={this.props.history}/>
             </div>
             <div>
               {blog.comments

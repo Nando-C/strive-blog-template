@@ -60,7 +60,9 @@ class PostModal extends Component {
             })
             if(response.ok) {
                 console.log(`Sucessfully deleted post with ID: ${blogId}`)
+                console.log(this.props)
                 this.props.handleClose()
+                this.props.history.push("/")
             }
           } catch (error) {
               console.log(error)
